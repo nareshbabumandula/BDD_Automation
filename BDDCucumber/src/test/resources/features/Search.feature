@@ -21,7 +21,7 @@ When i enter any product name with a partial text "umbre"
 And i click on search button
 Then it should display the appropriate product details
 
-@smoke
+@smokeoutline
 Scenario Outline: verify the search functionality with a partial text
 When i enter any product name with a partial text as "<productname>"
 And i click on search button
@@ -35,7 +35,7 @@ Examples:
 |watc|
 |electr|
 
-@dryrun
+@smoke
 Scenario: verify the search functionality with a partial text
 When i enter any product name with a partial text 
 |bottl|
@@ -43,5 +43,9 @@ When i enter any product name with a partial text
 |erase|
 And i click on search button
 Then it should display the appropriate product details
+
+@smoke
+Scenario: verify the logo displayed in Amazon homepage
+Then I should see amazon logo displayed
 
 
