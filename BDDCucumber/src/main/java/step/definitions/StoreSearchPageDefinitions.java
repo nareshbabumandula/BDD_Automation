@@ -35,9 +35,9 @@ public class StoreSearchPageDefinitions {
 		test.log(LogStatus.PASS, "Accessed EyeGlassWorld website");
 	}
 
-	@When("I search for an eyeglass store based on City name")
-	public void searchStore() {
-		driver.getDriver().findElement(By.id("inputStoreValue")).sendKeys("Tampa");
+	@When("I search for an eyeglass store based on city {string}")
+	public void searchStore(String City) {
+		driver.getDriver().findElement(By.id("inputStoreValue")).sendKeys(City);
 		driver.getDriver().findElement(By.xpath("//button[contains(text(),'Find a Store')]")).click();
 		System.out.println("Searched an EyeGlass store based on city name");
 		test.log(LogStatus.PASS, "Searched an EyeGlass store based on city name");
@@ -51,22 +51,24 @@ public class StoreSearchPageDefinitions {
 		}
 	}
 
-	@When("I search for an eyeglass store based on {string} name")
-	public void searchStores(String city) {
-		System.out.println("Searched an EyeGlass store based on city : " + city);
-	}
+	
+	  @When("I search for an eyeglass store based on {string} name") 
+	  public void searchStores(String city) {
+		  System.out.println("Searched an EyeGlass store based on city : " + city); 
+	  }
+	 
 
-
-	@Then("I should see the appropriate store details in the search results page")
-	public void i_should_see_the_appropriate_store_details_in_the_search_results_page() {
+	@Then("I should see the appropriate store details in the search results page with city {string}")
+	public void i_should_see_the_appropriate_store_details_in_the_search_results_page(String city) {
 		wait = new ExplicitWaitUtils(WebDriverSingleton.getDriver());
-		wait.waitForElementToBeVisible(By.xpath("//span[contains(text(),'tampa')]"));
-		int numofStores = driver.getDriver().findElements(By.xpath("//span[contains(text(),'tampa')]")).size();
+		wait.waitForElementTextTobePresent(By.xpath("//span[contains(text(),'"+city+"')]"), city);
+		int numofStores = driver.getDriver().findElements(By.xpath("//span[contains(text(),'"+city+"')]")).size();
 		if (numofStores>0) {
 			System.out.println("Successfully verified the store search results");
 			test.log(LogStatus.PASS, "Successfully verified the store search results");
 		} else {
-			System.out.println("No store displayed with Tampa address");
+			test.log(LogStatus.FAIL, "No store displayed with the search criteria");
+			System.out.println("No store displayed with the search criteria");
 		}
 		report.endTest(test);
 		report.flush();

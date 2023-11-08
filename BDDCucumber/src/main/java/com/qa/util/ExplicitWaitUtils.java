@@ -18,7 +18,7 @@ public class ExplicitWaitUtils {
 
     public ExplicitWaitUtils(WebDriver driver) {
         this.driver = WebDriverSingleton.getDriver();
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20)); // You can adjust the timeout as needed
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // You can adjust the timeout as needed
       
     }
 
@@ -34,6 +34,10 @@ public class ExplicitWaitUtils {
         wait.until(ExpectedConditions.elementToBeSelected(locator));
     }
 
+    public void waitForElementTextTobePresent(By locator, String text) {
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, text));
+    }
+    
     // You can add more custom waiting methods as needed
     public void waitForCustomCondition(ExpectedCondition<Boolean> condition) {
         wait.until(condition);
