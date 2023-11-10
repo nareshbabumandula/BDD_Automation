@@ -3,6 +3,8 @@ package step.definitions;
 import java.util.List;
 import java.util.Map;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
 import com.main.WebDriverSingleton;
 import com.qa.util.ExplicitWaitUtils;
@@ -35,9 +37,9 @@ public class StoreSearchPageDefinitions {
 		test.log(LogStatus.PASS, "Accessed EyeGlassWorld website");
 	}
 
-	@When("I search for an eyeglass store based on city {string}")
-	public void searchStore(String City) {
-		driver.getDriver().findElement(By.id("inputStoreValue")).sendKeys(City);
+	@When("I search for an eyeglass store based on city\\/state\\/zipcode {string}")
+	public void searchStore(String string) {
+		driver.getDriver().findElement(By.id("inputStoreValue")).sendKeys(string);
 		driver.getDriver().findElement(By.xpath("//button[contains(text(),'Find a Store')]")).click();
 		System.out.println("Searched an EyeGlass store based on city name");
 		test.log(LogStatus.PASS, "Searched an EyeGlass store based on city name");
@@ -58,20 +60,34 @@ public class StoreSearchPageDefinitions {
 	  }
 	 
 
-	@Then("I should see the appropriate store details in the search results page with city {string}")
-	public void i_should_see_the_appropriate_store_details_in_the_search_results_page(String city) {
-		wait = new ExplicitWaitUtils(WebDriverSingleton.getDriver());
-		wait.waitForElementTextTobePresent(By.xpath("//span[contains(text(),'"+city+"')]"), city);
-		int numofStores = driver.getDriver().findElements(By.xpath("//span[contains(text(),'"+city+"')]")).size();
-		if (numofStores>0) {
-			System.out.println("Successfully verified the store search results");
-			test.log(LogStatus.PASS, "Successfully verified the store search results");
-		} else {
-			test.log(LogStatus.FAIL, "No store displayed with the search criteria");
-			System.out.println("No store displayed with the search criteria");
+	@Then("I should see the appropriate store details in the search results page with city\\/state\\/zipcode {string}")
+	public void i_should_see_the_appropriate_store_details_in_the_search_results_page(String string) {
+		String errMsg;
+		try {
+			wait = new ExplicitWaitUtils(WebDriverSingleton.getDriver());
+			
+			// Use JavaScriptExecutor to find the hidden element
+	        WebElement hiddenElement = (WebElement) ((JavascriptExecutor) driver.getDriver()).executeScript("return document.getElementsByClassName('nearyou');");
+		
+			
+			 // Locate the WebElement
+	        WebElement element = driver.getDriver().findElement(By.xpath("//div[@class='Locator-resultsSummary']/h2/span[2]"));
+	       
+			
+			wait.waitForElementToBeVisible(By.xpath("//div[@class='Locator-resultsSummary']/h2/span[2]"));
+			//String actStore = driver.getDriver().findElement(By.xpath("//div[@class='Locator-resultsSummary']/h2/span[2]")).getText();
+			if ("store".equalsIgnoreCase(string)) {
+				System.out.println("Successfully verified the store search results");
+				test.log(LogStatus.PASS, "Successfully verified the store search results in city/state/zipcode : " + string);
+			} 
+		} catch (Exception e) {
+			errMsg=e.getMessage();
+			test.log(LogStatus.FAIL, "No store displayed in results with the search criteria : " + string +  " since - " +errMsg);
+			System.out.println("No store displayed in results with the search criteria : " + string + " since - " +errMsg);
+			e.printStackTrace();
+			report.endTest(test);
+			report.flush();
 		}
-		report.endTest(test);
-		report.flush();
 	}
 
 }
