@@ -18,7 +18,7 @@ public class ExplicitWaitUtils {
 
     public ExplicitWaitUtils(WebDriver driver) {
         this.driver = WebDriverSingleton.getDriver();
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(30)); // You can adjust the timeout as needed
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // You can adjust the timeout as needed
       
     }
 

@@ -65,18 +65,10 @@ public class StoreSearchPageDefinitions {
 		String errMsg;
 		try {
 			wait = new ExplicitWaitUtils(WebDriverSingleton.getDriver());
+			wait.waitForElementToBeVisible(By.xpath("//h2[@class='show1']/span[2]"));
 			
-			// Use JavaScriptExecutor to find the hidden element
-	        WebElement hiddenElement = (WebElement) ((JavascriptExecutor) driver.getDriver()).executeScript("return document.getElementsByClassName('nearyou');");
-		
-			
-			 // Locate the WebElement
-	        WebElement element = driver.getDriver().findElement(By.xpath("//div[@class='Locator-resultsSummary']/h2/span[2]"));
-	       
-			
-			wait.waitForElementToBeVisible(By.xpath("//div[@class='Locator-resultsSummary']/h2/span[2]"));
-			//String actStore = driver.getDriver().findElement(By.xpath("//div[@class='Locator-resultsSummary']/h2/span[2]")).getText();
-			if ("store".equalsIgnoreCase(string)) {
+			String actStore = driver.getDriver().findElement(By.xpath("//h2[@class='show1']/span[2]")).getText();
+			if (actStore.equalsIgnoreCase(string)) {
 				System.out.println("Successfully verified the store search results");
 				test.log(LogStatus.PASS, "Successfully verified the store search results in city/state/zipcode : " + string);
 			} 
@@ -85,9 +77,9 @@ public class StoreSearchPageDefinitions {
 			test.log(LogStatus.FAIL, "No store displayed in results with the search criteria : " + string +  " since - " +errMsg);
 			System.out.println("No store displayed in results with the search criteria : " + string + " since - " +errMsg);
 			e.printStackTrace();
-			report.endTest(test);
-			report.flush();
 		}
+		report.endTest(test);
+		report.flush();
 	}
 
 }
