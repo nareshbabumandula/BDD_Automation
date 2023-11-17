@@ -27,15 +27,13 @@ public class StoreSearchPageDefinitions {
 	
 	@Given("I access EyeGlass world website")
 	public void accessSite() {
-		report = new ExtentReports("./target/ExtentReport/ExtentResults.html");
-		test = report.startTest("EGW_TC01");
 		System.setProperty("webdriver.chrome.driver", "./browsers/chromedriver.exe");
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--remote-allow-origins=*");
 		driver.getDriver().get("https://www.eyeglassworld.com");
 		driver.getDriver().manage().window().maximize();
 		System.out.println("Accessed EyeGlassWorld website");
-		test.log(LogStatus.PASS, "Accessed EyeGlassWorld website");
+		Hooks.getExtentTest().log(LogStatus.PASS, "Accessed EyeGlassWorld website");
 	}
 
 	@When("I search for an eyeglass store based on city\\/state\\/zipcode {string}")
@@ -43,7 +41,7 @@ public class StoreSearchPageDefinitions {
 		driver.getDriver().findElement(By.id("inputStoreValue")).sendKeys(string);
 		driver.getDriver().findElement(By.xpath("//button[contains(text(),'Find a Store')]")).click();
 		System.out.println("Searched an EyeGlass store based on city name");
-		test.log(LogStatus.PASS, "Searched an EyeGlass store based on city name");
+		Hooks.getExtentTest().log(LogStatus.PASS, "Searched an EyeGlass store based on city name");
 	}
 
 	@When("I search for an eyeglass store based on different Cities")
@@ -59,7 +57,7 @@ public class StoreSearchPageDefinitions {
 		driver.getDriver().findElement(By.id("inputStoreValue")).sendKeys(string);
 		driver.getDriver().findElement(By.xpath("//button[contains(text(),'Find a Store')]")).click();
 		System.out.println("Searched an EyeGlass store based on city/state/zip name");
-		test.log(LogStatus.PASS, "Searched an EyeGlass store based on city/state/zip name");
+		Hooks.getExtentTest().log(LogStatus.PASS, "Searched an EyeGlass store based on city/state/zip name");
 	}
 
 	@Then("I should see the appropriate store details in the search results page with {string}")
@@ -79,23 +77,21 @@ public class StoreSearchPageDefinitions {
 
 			if (actStore.equalsIgnoreCase(string)) {
 				System.out.println("Successfully verified the store search results");
-				test.log(LogStatus.PASS, "Successfully verified the store search results in city/state/zipcode : " + string);
+				Hooks.getExtentTest().log(LogStatus.PASS, "Successfully verified the store search results in city/state/zipcode : " + string);
 			} 
 		} catch (Exception e) {
 			errMsg=e.getMessage();
-			test.log(LogStatus.FAIL, "No store displayed in results with the search criteria : " + string +  " since - " +errMsg);
+			Hooks.getExtentTest().log(LogStatus.FAIL, "No store displayed in results with the search criteria : " + string +  " since - " +errMsg);
 			System.out.println("No store displayed in results with the search criteria : " + string + " since - " +errMsg);
 			e.printStackTrace();
 		}
 
 	}
 
-
 	@When("I search for an eyeglass store based on {string} name") 
 	public void searchStores(String city) {
 		System.out.println("Searched an EyeGlass store based on city : " + city); 
 	}
-
 
 	@Then("I should see the appropriate store details in the search results page with city\\/state\\/zipcode {string}")
 	public void i_should_see_the_appropriate_store_details_in_the_search_results_page(String string) {
@@ -114,11 +110,11 @@ public class StoreSearchPageDefinitions {
 
 			if (actStore.equalsIgnoreCase(string)) {
 				System.out.println("Successfully verified the store search results");
-				test.log(LogStatus.PASS, "Successfully verified the store search results in city/state/zipcode : " + string);
+				Hooks.getExtentTest().log(LogStatus.PASS, "Successfully verified the store search results in city/state/zipcode : " + string);
 			} 
 		} catch (Exception e) {
 			errMsg=e.getMessage();
-			test.log(LogStatus.FAIL, "No store displayed in results with the search criteria : " + string +  " since - " +errMsg);
+			Hooks.getExtentTest().log(LogStatus.FAIL, "No store displayed in results with the search criteria : " + string +  " since - " +errMsg);
 			System.out.println("No store displayed in results with the search criteria : " + string + " since - " +errMsg);
 			e.printStackTrace();
 		}

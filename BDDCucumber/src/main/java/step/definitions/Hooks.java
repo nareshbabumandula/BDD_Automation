@@ -21,32 +21,36 @@ public class Hooks{
 	private static boolean isReportGenerated = false;
 
 
-	@Before(order=1) 
+	@Before(order=0) 
 	public void setup() {
 		driver = WebDriverSingleton.getDriver();
 		System.out.println("This will run before the Scenario with order one"); 
-		if (!isReportGenerated) {
-            // Code to initialize and start the Extent Report
-            // This will run before the first scenario outline execution
-			// Extent Reports
+		if (report == null) {
 			report = new ExtentReports("./target/ExtentReport/ExtentResults.html");
-			test = report.startTest("EGW_TC01");
-            isReportGenerated = true;
-        }
+			isReportGenerated = true;
+		}
 	}
 
-	@Before(order=2) 
+	@Before(order=1) 
 	public void beforeScenarioOrdertwo(Scenario scenario){
-		System.out.println("This will run before the Scenario with order two"); 
+		test = report.startTest("EGW_TC01");
+		//System.out.println("This will run before the Scenario with order two"); 
 	}
 
-	@After 
+	@After(order=999) 
 	public void afterScenario(){
 		driver.quit();
-		System.out.println("This will run after the Scenario");
-		report.endTest(test);
-		report.flush();
+		//System.out.println("This will run after the Scenario");
+		if (report != null) {
+			report.endTest(test);
+			report.flush();
+		}
 	}
+	
+	// Getter method for ExtentTest object to be used in step definitions
+    public static ExtentTest getExtentTest() {
+        return test;
+    }
 
 	@BeforeStep 
 	public void beforeStep(){
