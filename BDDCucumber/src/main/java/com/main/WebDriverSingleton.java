@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class WebDriverSingleton {
 	
     private static WebDriver driver;
@@ -21,22 +23,17 @@ public class WebDriverSingleton {
     public static WebDriver getDriver() {
 
         if (driver==null) {
-            // Set the path to the driver executable depending on the browser you're using
-            System.setProperty("webdriver.chrome.driver", "./browsers/chromedriver.exe");
             ChromeOptions options = new ChromeOptions();
     		options.addArguments("--remote-allow-origins=*");
+        	WebDriverManager.chromedriver().setup();
     		driver = new ChromeDriver(options);
         }else if(driver.toString().contains("(null)")) {
-        	// Set the path to the driver executable depending on the browser you're using
-            System.setProperty("webdriver.chrome.driver", "./browsers/chromedriver.exe");
-            ChromeOptions options = new ChromeOptions();
+        	ChromeOptions options = new ChromeOptions();
     		options.addArguments("--remote-allow-origins=*");
+        	WebDriverManager.chromedriver().setup();
     		driver = new ChromeDriver(options);
         }
         return driver;
     }
-    
-    public static void main(String[] args) {
-    	
-    }
+       
 }

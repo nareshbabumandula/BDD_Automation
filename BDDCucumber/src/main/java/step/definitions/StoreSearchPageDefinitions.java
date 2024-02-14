@@ -22,6 +22,7 @@ import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 
 public class StoreSearchPageDefinitions {
@@ -37,9 +38,6 @@ public class StoreSearchPageDefinitions {
 
 	@Given("I access EyeGlass world website")
 	public void accessSite() {
-		System.setProperty("webdriver.chrome.driver", "./browsers/chromedriver.exe");
-		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--remote-allow-origins=*");
 		driver.getDriver().get("https://www.eyeglassworld.com");
 		driver.getDriver().manage().window().maximize();
 		System.out.println("Accessed EyeGlassWorld website");
