@@ -24,6 +24,5 @@ When I search for an eyeglass store based on different Cities
 |City/State/Zipcode|
 |dallas|
 |austin|
-
 Then I should see the appropriate store details in the search results
 
