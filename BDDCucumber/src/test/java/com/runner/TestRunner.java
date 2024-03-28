@@ -11,7 +11,7 @@ import io.cucumber.junit.CucumberOptions;
 @RunWith(Cucumber.class)
 @CucumberOptions(
    //path of feature file
-   features = {"src/test/resources/features/StoreSearch.feature"},
+   features = {"src/test/resources/features/SwagLabs.feature"},
    //path of step definition file
    glue = {"step.definitions"},plugin = {
 	        "pretty:target/prettyReport.txt", "html:target/cucumber.html", "json:target/cucumber.json", "rerun:target/rerun.txt",
