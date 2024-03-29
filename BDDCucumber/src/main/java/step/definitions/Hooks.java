@@ -16,7 +16,6 @@ import io.cucumber.java.Scenario;
 
 public class Hooks{
 
-
 	WebDriver driver;
 	public static ExtentTest test;
 	public static ExtentReports report;
@@ -35,7 +34,7 @@ public class Hooks{
 
 	@Before(order=1) 
 	public void beforeScenarioOrdertwo(Scenario scenario){
-		test = report.startTest("EGW_TC01");
+		test = report.startTest("TC01");
 		//System.out.println("This will run before the Scenario with order two"); 
 	}
 

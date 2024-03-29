@@ -7,13 +7,13 @@ import java.util.Properties;
 
 public class ConfigReader {
 
-	private Properties prop;
+	private static Properties prop;
 
 	/**
 	 * This method is used to load the properties from config.properties file
 	 * @return it returns Properties prop object
 	 */
-	public Properties init_prop() {
+	public static Properties init_prop() {
 
 		prop = new Properties();
 		try {
