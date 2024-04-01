@@ -11,7 +11,7 @@ public class SwagLabsLoginPage {
 	
 	WebDriver driver;
 	
-	@FindBy(xpath = "//div[contains(text(),'Swag Labs123')]")
+	@FindBy(xpath = "//div[contains(text(),'Swag Labs')]")
 	public WebElement SwagLabsLoginHeader;
 	
 	@FindBy(id = "user-name")
@@ -26,7 +26,7 @@ public class SwagLabsLoginPage {
 	@FindBy(xpath = "//h4[contains(text(),'Accepted usernames are:')]")
 	public WebElement acceptedusernames;
 	
-	@FindBy(xpath="//h4[contains(text(),'Password for all users123:')]")
+	@FindBy(xpath="//h4[contains(text(),'Password for all users:')]")
 	public WebElement acceptedpasswords;
 	
 	

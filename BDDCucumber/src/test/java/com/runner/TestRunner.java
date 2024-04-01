@@ -2,9 +2,6 @@ package com.runner;
 
 import org.junit.runner.RunWith;
 
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
-
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 
@@ -19,7 +16,7 @@ import io.cucumber.junit.CucumberOptions;
    			monochrome = true,publish=true,tags="~@smoke or ~@regression or ~@datarun or @dryrun"
    )
 public class TestRunner{
-
+	
 
 	
 }

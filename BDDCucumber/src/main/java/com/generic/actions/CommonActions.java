@@ -33,5 +33,39 @@ public class CommonActions {
 			}
 		}
 	}
+	
+	public static void type(WebElement element, String data, String objectName) {
+		boolean bFlag=false;
+		String errMsg="";
+		try {
+			element.sendKeys(data);
+			bFlag=true;
+		} catch (Exception e) {
+			errMsg=e.getMessage();
+		}finally {
+			if (bFlag) {
+				Hooks.getExtentTest().log(LogStatus.PASS, "Data entered in '" + objectName+ "' as " + data);
+			} else {
+				Hooks.getExtentTest().log(LogStatus.FAIL, "Failed to enter the data in '" + objectName + "' since : " + errMsg);
+			}
+		}
+	}
+	
+	public static void click(WebElement element, String objectName) {
+		boolean bFlag=false;
+		String errMsg="";
+		try {
+			element.click();
+			bFlag=true;
+		} catch (Exception e) {
+			errMsg=e.getMessage();
+		}finally {
+			if (bFlag) {
+				Hooks.getExtentTest().log(LogStatus.PASS, "Clicked on '" + objectName);
+			} else {
+				Hooks.getExtentTest().log(LogStatus.FAIL, "Failed to click on '" + objectName + "' since : " + errMsg);
+			}
+		}
+	}
 
 }

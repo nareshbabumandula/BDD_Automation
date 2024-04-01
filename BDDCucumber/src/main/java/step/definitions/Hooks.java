@@ -65,7 +65,7 @@ public class Hooks{
 			report.endTest(test);
 			report.flush();
 		}
-		
+	
 		driver.quit();
 		
 	}
