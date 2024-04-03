@@ -13,14 +13,13 @@ Scenario: Verify the mandatory fields displayed for 'Swag Labs' products
 When i enter username as "standard_user"
 And i enter password as "secret_sauce"
 And i click on Login button
-Then i should see the mandatory options for Swag Labs products
+Then i should see the mandatory options for Swag Labs product
 
-@dryrun
-Scenario Outline: Verify the mandatory fields displayed for 'Swag Labs' products
+Scenario Outline: Verify the mandatory fields displayed for a 'Swag Labs' product
 When i enter username as "<username>"
 And i enter password as "<password>"
 And i click on Login button
-Then i should see the mandatory options for Swag Labs products
+Then i should see the mandatory options for a Swag Labs product
 Examples:
 |username|password|
 |standard_user|secret_sauce|
@@ -29,5 +28,16 @@ Examples:
 |error_user|secret_sauce|
 |visual_user|secret_sauce|
 
+@dryrun
+Scenario: Verify the mandatory fields displayed for 'Swag Labs' products
+When i enter username as "standard_user"
+And i enter password as "secret_sauce"
+And i click on Login button
+Then i should see the mandatory options for Swag Labs products
+|productsName|
+|productsImage|
+|productsDescription|
+|productsPrice|
+|productsAddToCart|
 
 
