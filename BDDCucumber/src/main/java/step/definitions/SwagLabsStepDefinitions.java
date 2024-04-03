@@ -1,6 +1,7 @@
 package step.definitions;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.Properties;
 
 import com.generic.actions.CommonActions;
@@ -78,9 +79,61 @@ public class SwagLabsStepDefinitions {
 		CommonActions.click(slp.login, "Login");
 	}
 
-	@Then("i should see the mandatory options for Swag Labs products")
-	public void i_should_see_the_mandatory_options_for_swag_labs_products() {
+	@Then("i should see the mandatory options for a Swag Labs product")
+	public void i_should_see_the_mandatory_options_for_swag_labs_product() {
 		sp.verifyProductDetails();
 	}
 
+
+	@Then("i should see the mandatory options for Swag Labs products")
+	public void i_should_see_the_mandatory_options_for_swag_labs_products(io.cucumber.datatable.DataTable dataTable) {
+		List<String> options = dataTable.asList();
+
+		try {
+			for (String item : options) {
+				switch (item) {
+				case "productsName":
+					int productsCount = sp.productsName.size();
+					for (int i = 0; i <= productsCount-1; i++) {
+						System.out.println(sp.productsName.get(i).getText());
+						hooks.test.log(LogStatus.PASS, "Swag Labs product name", "Swag Labs product name is displayed : " + sp.productsName.get(i).getText());
+					}
+					break;
+				case "productsImage":
+					int productsImageCount = sp.productsImage.size();
+					for (int i = 0; i <= productsImageCount-1; i++) {
+						System.out.println(sp.productsImage.get(i).getAttribute("alt"));
+						hooks.test.log(LogStatus.PASS, "Swag Labs product image", "Swag Labs product image is displayed for product : " +sp.productsImage.get(i).getAttribute("alt"));
+					}
+					break;
+				case "productsDescription":
+					int productsDescCount = sp.productsDescription.size();
+					for (int i = 0; i <= productsDescCount-1; i++) {
+						System.out.println(sp.productsDescription.get(i).getText());
+						hooks.test.log(LogStatus.PASS, "Swag Labs product description", "Swag Labs product description is displayed as : " +sp.productsDescription.get(i).getText());
+					}
+					break;
+				case "productsPrice":
+					int productsPriceCount = sp.productsPrice.size();
+					for (int i = 0; i <= productsPriceCount-1; i++) {
+						System.out.println(sp.productsPrice.get(i).getText());
+						hooks.test.log(LogStatus.PASS, "Swag Labs product price", "Swag Labs product price is displayed as : " + sp.productsPrice.get(i).getText());
+					}
+					break;
+				case "productsAddToCart":
+					int productsAddToCartCount = sp.productsAddToCart.size();
+					for (int i = 0; i <= productsAddToCartCount-1; i++) {
+						System.out.println(sp.productsAddToCart.get(i).getText());
+						hooks.test.log(LogStatus.PASS, "Swag Labs AddToCart", "AddToCart button is displayed for Swag Labs product");
+					}
+					break;
+
+				default:
+					break;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

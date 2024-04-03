@@ -170,7 +170,6 @@ public class StoreSearchPageDefinitions {
 	public void i_should_see_the_appropriate_store_details_in_the_search_results() {
 		Hooks.getExtentTest().log(LogStatus.PASS, "Verify Store Details", "Appropriate store details are displayed in the search results");
 	}
-
 	
 
 }

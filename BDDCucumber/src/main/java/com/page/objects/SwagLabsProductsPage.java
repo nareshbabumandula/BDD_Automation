@@ -1,5 +1,7 @@
 package com.page.objects;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,6 +28,21 @@ public class SwagLabsProductsPage {
 	
 	@FindBy(xpath = "//button[contains(text(), 'Add to cart')]")
 	public WebElement productAddToCart;
+	
+	@FindBy(xpath="//div[@class='inventory_item_name ']")
+	public List<WebElement> productsName;
+	
+	@FindBy(xpath = "//img[@class='inventory_item_img']")
+	public List<WebElement> productsImage;
+	
+	@FindBy(className = "inventory_item_desc")
+	public List<WebElement> productsDescription;
+	
+	@FindBy(className = "inventory_item_price")
+	public List<WebElement> productsPrice;
+	
+	@FindBy(xpath = "//button[contains(text(), 'Add to cart')]")
+	public List<WebElement> productsAddToCart;
 	
 	/**
 	 *@Desc Verifies all the mandatory options to be displayed for a product
