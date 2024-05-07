@@ -4,11 +4,17 @@
   <artifactId>BDDCucumber</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   
-  <build>
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+ </properties>
+ 
+ <build>
     <plugins>
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
             <configuration>
                 <source>1.8</source>
                 <target>1.8</target>
@@ -16,34 +22,27 @@
         </plugin>
     </plugins>
 </build>
-  <dependencies>
+
+
+  
+    <dependencies>
+    
+    <dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.18.20</version> <!-- Make sure to use the latest or a compatible version -->
+    <scope>provided</scope>
+</dependency>
+
 	
 	<dependency>
      <groupId>info.cukes</groupId>
      <artifactId>cucumber-junit</artifactId>
      <version>1.2.5</version>
  	</dependency>
-  
-    <dependency>
-    <groupId>info.cukes</groupId>
-    <artifactId>cucumber-java</artifactId>
-    <version>1.2.0</version>
-    <scope>test</scope>
-</dependency>
 
-<dependency>
-    <groupId>info.cukes</groupId>
-    <artifactId>cucumber-junit</artifactId>
-    <version>1.2.0</version>
-</dependency>
-    
+   
   <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
-<dependency>
-    <groupId>io.cucumber</groupId>
-    <artifactId>cucumber-junit</artifactId>
-    <version>7.10.1</version>
-    <scope>test</scope>
-</dependency>
 
 <!-- https://mvnrepository.com/artifact/com.relevantcodes/extentreports -->
 <dependency>
@@ -64,10 +63,9 @@
 	<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-jvm</artifactId>
-			<version>6.8.1</version>
+			<version>7.10.1</version>
 			<type>pom</type>
        </dependency>
-       
        	<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>gherkin</artifactId>
@@ -121,5 +119,7 @@
 	</dependency>
 
   </dependencies>
+  
+  
   
 </project>
