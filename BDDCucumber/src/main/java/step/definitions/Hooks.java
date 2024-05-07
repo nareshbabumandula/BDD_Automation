@@ -86,5 +86,13 @@ public class Hooks{
 		System.out.println("This will run after each step in a scenario"); 
 	}
 
+	
+	@AfterStep
+	public void addScreenshot(Scenario scenario) {
+		if(!scenario.isFailed()) {
+			final byte[] screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+			scenario.attach(screenshot, "image/png", scenario.getName());
+		}
+	}
 
 }

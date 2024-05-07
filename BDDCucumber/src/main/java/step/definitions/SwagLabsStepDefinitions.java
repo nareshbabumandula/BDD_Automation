@@ -9,14 +9,13 @@ import com.main.WebDriverSingleton;
 import com.page.objects.SwagLabsLoginPage;
 import com.page.objects.SwagLabsProductsPage;
 import com.qa.util.ConfigReader;
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import junit.framework.Assert;
+
 
 public class SwagLabsStepDefinitions {
 
@@ -25,11 +24,13 @@ public class SwagLabsStepDefinitions {
 	SwagLabsProductsPage sp;
 	Hooks hooks;
 	Properties properties;
-
+	
+	private Scenario scenario;
+	
 	public SwagLabsStepDefinitions() {
 		properties = ConfigReader.init_prop();
 		slp = new SwagLabsLoginPage(base.getDriver());
-		sp = new SwagLabsProductsPage(base.getDriver());		
+		sp = new SwagLabsProductsPage(base.getDriver());	
 	}
 
 	@Given("i access Sauce Demo portal")
@@ -47,7 +48,7 @@ public class SwagLabsStepDefinitions {
 
 	@Then("i should see Swag Labs login page")
 	public void i_should_see_swag_labs_login_page() {
-
+		
 		if (slp.SwagLabsLoginHeader.isDisplayed()) {
 			hooks.test.log(LogStatus.PASS, "Verify Swag Labs login heading", "Swag Labs login page heading is displayed");
 		} else {
@@ -88,7 +89,7 @@ public class SwagLabsStepDefinitions {
 	@Then("i should see the mandatory options for Swag Labs products")
 	public void i_should_see_the_mandatory_options_for_swag_labs_products(io.cucumber.datatable.DataTable dataTable) {
 		List<String> options = dataTable.asList();
-
+		
 		try {
 			for (String item : options) {
 				switch (item) {
@@ -132,6 +133,7 @@ public class SwagLabsStepDefinitions {
 					break;
 				}
 			}
+			throw new RuntimeException("This step has failed intentionally.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
