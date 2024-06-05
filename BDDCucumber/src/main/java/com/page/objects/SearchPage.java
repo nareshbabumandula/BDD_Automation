@@ -2,6 +2,7 @@ package com.page.objects;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,6 +14,14 @@ public class SearchPage {
 	
 	WebDriver driver;
 	
+	public static By cityname = By.xpath("//span[@class='nearyou']");
+	
+	@FindBy(xpath="//input[@id='inputStoreValue']")
+	public WebElement txtStoreSearch;
+	
+	@FindBy(xpath="//button[contains(text(),'Find a Store')]")
+	public WebElement btnFindStore;
+		
 	@FindBy(xpath = "//a[@title='Schedule Exam123']")
 	public List<WebElement> btnScheduleExam;
 	

@@ -79,16 +79,10 @@ public class Hooks{
 	public void beforeStep(){
 		System.out.println("This will run before each step in a scenario");
 	}
-
-
-	@AfterStep 
-	public void afterStep(){
-		System.out.println("This will run after each step in a scenario"); 
-	}
-
 	
 	@AfterStep
 	public void addScreenshot(Scenario scenario) {
+		System.out.println("This will run after each step in a scenario"); 
 		if(!scenario.isFailed()) {
 			final byte[] screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
 			scenario.attach(screenshot, "image/png", scenario.getName());

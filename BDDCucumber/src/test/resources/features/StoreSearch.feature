@@ -15,7 +15,7 @@ Then I should see the appropriate store details in the search results page with 
 Examples:
 |city/state/zipcode|
 |atlanta|
-|goergia|
+#|tampa|
 
 
 @datatablerun
